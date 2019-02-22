@@ -7,7 +7,7 @@
 		<title>reveal.js</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/isovera.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -24,8 +24,53 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+
+				<section>
+					<h2>An Introduction To</h2>
+					<h1>Service Workers</h1>
+					<p>Aaron Manire</p>
+					<p><small><a href="http://amanire.github.io/isw">amanire.github.io/isw</a></small></p>
+				</section>
+
+				<section>
+					<h2>About myself</h2>
+					<aside class="notes">
+						Been building sites with Drupal since 2007.
+						Got a job at a small company that build non-profit Drupal sites.
+						Developer at Isovera since 2011.
+					</aside>
+				</section>
+
+				<section>
+					<section>
+						<h2>Who or what is a Service Worker?</h2>
+						<aside class="notes">So let's get right to it and start with what you're all probably wondering.
+							So… who or what exactly do you mean by a service worker?
+						</aside>
+					</section>
+
+					<section>
+							<h2>Web Workers API</h2>
+							<ul>
+								<li class="fragment">Shared Workers</li>
+								<li class="fragment">Audio Workers</li>
+								<li class="fragment">Service Workers</li>
+							</ul>
+						<aside class="notes">Web Workers makes it possible to run a script operation in a background thread separate from the main execution thread of a web application. The advantage of this is that laborious processing can be performed in a separate thread, allowing the main (usually the UI) thread to run without being blocked/slowed down.</aside>
+						</section>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+				## Resources
+				- Offline Web Applications by Google
+				[udacity.com/course/offline-web-applications--ud899](https://udacity.com/course/offline-web-applications--ud899)
+				- Service Workers Cookbook by Mozilla
+				[serviceworke.rs](https://serviceworke.rs/)
+				- [deanhume.com/tag/service-workers/](https://deanhume.com/tag/service-workers/)
+				
+					</textarea>
+				</section>
 			</div>
 		</div>
 
