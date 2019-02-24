@@ -7,6 +7,7 @@
 		<title>Intro to Service Workers</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
 		<link rel="stylesheet" href="css/theme/isovera.css">
 
 		<!-- Theme used for syntax highlighting of code -->
@@ -103,6 +104,51 @@
 					<img src="images/quicklink.png" />
 					<aside class="notes"></aside>
 				</section>
+
+			  <section>
+					<h2>Typical Network Request</h2>
+					<img src="images/" />
+					<aside class="notes"></aside>
+				</section>
+
+			  <section>
+					<h2>Typical Network Request</h2>
+					<h3>Failure and frustration</h3>
+					<ul>
+						<li class="fragment">No nearby cell tower</li>
+						<li class="fragment">Wifi is flaky</li>
+						<li class="fragment">ISP trouble</li>
+						<li class="fragment">Site server is down</li>
+					</ul>
+					<aside class="notes"></aside>
+				</section>
+
+				<section>
+					<h2>Network Request</h2>
+					<h3>with active Service&nbsp;Worker</h3>
+					<section>
+						<img src="images/" />
+						<aside class="notes"></aside>
+					</section>
+
+					<section>
+						<h3>Fetch event</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+	addEventListener('fetch', fetchEvent => {
+		fetchEvent.respondWith(
+			fetch(request)
+			.then(responseFromFetch => {
+				// Return something
+			})
+			.catch(error => {
+				// Return something else
+			})
+		);
+	});
+						</code></pre>
+						<aside class="notes"></aside>
+					</section>
+			</section>
 
 				<section data-markdown>
 					<textarea data-template>
