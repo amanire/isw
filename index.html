@@ -141,20 +141,29 @@
 						<h3>Fetch event</h3>
 						<pre><code class="javascript" data-trim data-noescape>
 	addEventListener('fetch', fetchEvent => {
-		fetchEvent.respondWith(
-			fetch(request)
-			.then(responseFromFetch => {
-				// Return something
-			})
-			.catch(error => {
-				// Return something else
-			})
-		);
+		// If fetch is successful, return results.
+		// …
+		// If fetch fails, return cached content.
+		// …
 	});
 						</code></pre>
 						<aside class="notes"></aside>
 					</section>
 			</section>
+
+				<section>
+					<h2>Requirements</h2>
+					<ul>
+						<li class="fragment">Compatible browser<br/>
+								See <a href="https://caniuse.com/#feat=serviceworkers">caniuse.com/#feat=serviceworkers</a>
+								<br/>
+								<small class="fragment">(Browsers that support Service Workers also support ES6.)</small>
+						</li>
+						<li class="fragment">HTTPS</li>
+						<li class="fragment">Same origin policy</li>
+					</ul>
+					<aside class="notes"></aside>
+				</section>
 
 				<section data-markdown>
 					<textarea data-template>
