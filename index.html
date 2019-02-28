@@ -115,18 +115,25 @@
 			  <section>
 					<h2>Typical Network Request</h2>
 					<section>
-					<img src="images/network-request.svg" />
-					<aside class="notes"></aside>
+						<img src="images/network-request.svg" />
+						<aside class="notes"></aside>
+					</section>
+
+					<section>
+						<h3>Failure and frustration</h3>
+						<ul>
+							<li class="fragment">No nearby cell tower</li>
+							<li class="fragment">Wifi is flaky</li>
+							<li class="fragment">ISP trouble</li>
+							<li class="fragment">Site server is down</li>
+						</ul>
+						<aside class="notes"></aside>
+					</section>
 				</section>
 
-			  <section>
-					<h3>Failure and frustration</h3>
-					<ul>
-						<li class="fragment">No nearby cell tower</li>
-						<li class="fragment">Wifi is flaky</li>
-						<li class="fragment">ISP trouble</li>
-						<li class="fragment">Site server is down</li>
-					</ul>
+				<section>
+					<h2>Waiting isn't Easy</h2>
+					<img src="images/" />
 					<aside class="notes"></aside>
 				</section>
 
@@ -149,7 +156,7 @@
 						</code></pre>
 						<aside class="notes"></aside>
 					</section>
-			</section>
+			  </section>
 
 				<section>
 					<h2>Requirements</h2>
@@ -189,6 +196,43 @@
 					</ol	>
 					<aside class="notes"></aside>
 					</section>
+				</section>
+
+				<section>
+					<h2>Working asynchronously</h2>
+					<h3>Promises API</h3>
+					<section>
+						<p>A promise can either be resolved or rejected.</p>
+						<small><a href="https://developers.google.com/web/fundamentals/primers/promises">developers.google.com/web/fundamentals/primers/promises</a></small>
+						<aside class="notes"></aside>
+					</section>
+
+					<section>
+					<h3>Creating a Promise</h3>
+					<pre><code class="javascript" data-trim data-noescape>
+var promise = new Promise((resolve, reject) => {
+	// Do something, e.g. fetch a file from the network.
+
+	if (/* everything turned out fine */) {
+		resolve("Stuff worked!");
+	}
+	else {
+		reject(Error("It broke"));
+	}
+});
+					</code></pre>
+					</section>
+
+					<section>
+						<h3>Using a Promise</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+promise.then((result) => {
+	console.log(result); // "Stuff worked!"
+}, (error) => {
+	console.log(error); // Error: "It broke"
+});
+						</code></pre>
+						</section>
 				</section>
 
 				<section data-markdown>
