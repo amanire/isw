@@ -232,7 +232,47 @@ promise.then((result) => {
 	console.log(error); // Error: "It broke"
 });
 						</code></pre>
-						</section>
+					</section>
+				</section>
+
+				<section>
+					<h2>Building a Service Worker</h2>
+					<ul>
+						<li class="fragment">HTTPS</li>
+						<li class="fragment">Add serviceworker.js</li>
+						<li class="fragment">Register Service Worker in script tag</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Service Worker events</h3>
+					<pre><code class="javascript" data-trim data-noescape>
+addEventListener('install', installEvent => {
+	// Cache stuff for later
+});
+
+addEventListener('activate', function (event) {
+	// Cleanup caches
+});
+
+addEventListener('fetch', fetchEvent => {
+	// Return fetched or cached stuff
+});
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Tips and Gotchas</h2>
+					<section>
+						<h3>Developer tools</h3>
+						<p><a href="https://www.chromium.org/blink/serviceworker/service-worker-faq">chromium.org/blink/serviceworker/service-worker-faq</a></p>
+					</section>
+
+					<section>
+						<h3>Developer tools</h3>
+						<p>Set console context to Service Worker</p>
+						<aside class="notes"></aside>
+					</section>
 				</section>
 
 				<section data-markdown>
