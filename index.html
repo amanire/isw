@@ -243,6 +243,16 @@ promise.then((result) => {
 						<li class="fragment">Register Service Worker in script tag</li>
 					</ul>
 				</section>
+				<section>
+					<h2>Registration</h2>
+<pre><code class="javascript" data-trim data-noescape>
+&lt;script&gt;
+if (navigator.serviceWorker && !navigator.serviceWorker.controller) {
+	navigator.serviceWorker.register('/serviceworker.js');
+}
+&lt;/script&gt;
+</code></pre>
+				</section>
 
 				<section>
 					<h3>Service Worker events</h3>
