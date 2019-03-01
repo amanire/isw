@@ -252,16 +252,33 @@ promise.then((result) => {
 						<li class="fragment">Caching strategy</li>
 					</ul>
 				</section>
+
 				<section>
 					<h2>Registration</h2>
+					<code>/index.html</code>
+					<section>
 <pre><code class="javascript" data-trim data-noescape>
 &lt;script&gt;
-if (navigator.serviceWorker && !navigator.serviceWorker.controller) {
+if (navigator.serviceWorker) {
 	navigator.serviceWorker.register('/serviceworker.js');
 }
 &lt;/script&gt;
 </code></pre>
 				</section>
+
+				<section>
+					<h3>Scope</h3>
+<pre class="fragment"><code class="javascript" data-trim data-noescape>
+&lt;script&gt;
+if (navigator.serviceWorker) {
+	navigator.serviceWorker.register('/serviceworker.js',
+	<mark>scope: '/app/'</mark>
+	);
+}
+&lt;/script&gt;
+</code></pre>
+				</section>
+			</section>
 
 				<section>
 					<h3>Service Worker events</h3>
