@@ -265,6 +265,16 @@ if (navigator.serviceWorker && !navigator.serviceWorker.controller) {
 
 				<section>
 					<h3>Service Worker events</h3>
+					<section>
+							<pre><code class="javascript" data-trim data-noescape>
+addEventListener('install', installEvent => {…});
+
+addEventListener('activate', activateEvent => {…});
+
+addEventListener('fetch', fetchEvent => {…});
+							</code></pre>
+						</section>
+						<section>
 					<pre><code class="javascript" data-trim data-noescape>
 addEventListener('install', installEvent => {
 	// Cache stuff for later
