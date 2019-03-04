@@ -309,7 +309,7 @@ addEventListener('fetch', fetchEvent => {// …});
 							</code></pre>
 						</section>
 						<section>
-					<pre><code class="javascript" data-trim data-noescape>
+							<pre><code class="javascript" data-trim data-noescape>
 addEventListener('install', installEvent => {
 	// Cache stuff for later
 });
@@ -321,9 +321,39 @@ addEventListener('activate', function (event) {
 addEventListener('fetch', fetchEvent => {
 	// Return fetched or cached stuff
 });
-					</code></pre>
-				</section>
-			</section>
+							</code></pre>
+						</section>
+					</section>
+
+					<section>
+						<h2>Install event</h2>
+						<pre><code class="javascript" data-trim data-noescape>
+addEventListener('install', installEvent => {
+// Cache stuff for later
+});
+						</code></pre>
+						<aside class="notes"></aside>
+					</section>
+
+					<section>
+						<h2>Activate event</h2>
+						<pre><code class="javascript" data-trim data-noescape>
+addEventListener('activate', function (event) {
+	// Cleanup caches
+});
+						</code></pre>
+						<aside class="notes"></aside>
+					</section>
+
+					<section>
+						<h2>Fetch event</h2>
+						<pre><code class="javascript" data-trim data-noescape>
+addEventListener('fetch', fetchEvent => {
+	// Return fetched or cached stuff
+});
+						</code></pre>
+						<aside class="notes"></aside>
+					</section>
 
 				<section>
 					<h2>Tips and Gotchas</h2>
