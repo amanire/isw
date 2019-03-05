@@ -259,19 +259,19 @@ promise.then((result) => {
 				<section>
 					<h2>Building a Service Worker</h2>
 					<ul>
-						<li class="fragment">HTTPS or <em>localhost</em></li>
-						<li class="fragment">Add serviceworker JavaScript file</li>
-						<li class="fragment">Register Service Worker via inline script tag</li>
+						<li class="fragment">HTTPS (or <em>localhost</em> for development)</li>
+						<li class="fragment">Register service worker</li>
+						<li class="fragment">Service worker JavaScript file</li>
 						<li class="fragment">Caching strategy</li>
 					</ul>
 				</section>
 
 				<section>
-					<h2>Registration</h2>
+					<h2>Register Service Worker</h2>
 					<code>/index.html</code>
 
 					<section>
-						<p>Progressive enhancement</p>
+						<p>via inline script tag</p>
 					</section>
 
 					<section>
@@ -282,7 +282,14 @@ if (navigator.serviceWorker) {
 }
 &lt;/script&gt;
 </code></pre>
+					<p class='fragment'>No modern JavaScript here!</p>
 					</section>
+
+					<section>
+						<h3>Progressive enhancement</h3>
+						<p>Service worker file is ignored if unsupported by browser.</p>
+					</section>
+
 					<section>
 						<h3>Scope</h3>
 <pre class="fragment"><code class="javascript" data-trim data-noescape>
