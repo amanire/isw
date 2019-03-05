@@ -310,7 +310,7 @@ if (navigator.serviceWorker) {
 					<section>
 						<h3>Versioned cache name</h3>
 						<pre><code class="javascript" data-trim data-noescape>
-const version = 'v0.1;
+const version = 'V0.1';
 const cacheName = 'MySWCache' + version;
 						</code></pre>
 					</section>
@@ -343,22 +343,69 @@ addEventListener('fetch', fetchEvent => {
 
 					<section>
 						<h2>Install event</h2>
-						<pre><code class="javascript" data-trim data-noescape>
+						<section>
+							<pre><code class="javascript" data-trim data-noescape>
+	addEventListener('install', installEvent => {
+	// Cache stuff for later
+	});
+							</code></pre>
+							<aside class="notes"></aside>
+						</section>
+
+					<section>
+							<pre><code class="javascript" data-trim data-noescape>
+// cacheName == 'MySWCacheV0.1'
+							</code></pre>
+							<pre><code class="javascript" data-trim data-noescape>
 addEventListener('install', installEvent => {
-// Cache stuff for later
+	installEvent.waitUntil(
+    caches.open(cacheName)
+    .then(cache => {
+      return cache.addAll([
+        'offline.html',
+        'styles.css'
+      ]);
+    })
+  );
 });
-						</code></pre>
-						<aside class="notes"></aside>
+							</code></pre>
+							<aside class="notes"></aside>
+						</section>
 					</section>
 
 					<section>
 						<h2>Activate event</h2>
-						<pre><code class="javascript" data-trim data-noescape>
+						<section>
+							<pre><code class="javascript" data-trim data-noescape>
 addEventListener('activate', function (event) {
 	// Cleanup caches
 });
-						</code></pre>
-						<aside class="notes"></aside>
+							</code></pre>
+							<aside class="notes"></aside>
+						</section>
+
+						<section>
+								<pre><code class="javascript" data-trim data-noescape>
+	// Delete old cacheName != 'MySWCacheV0.1'
+								</code></pre>
+							<pre><code class="javascript" data-trim data-noescape>
+addEventListener('activate', function (event) {
+	activateEvent.waitUntil(
+	caches.keys()
+	.then(cacheNames => {
+		return Promise.all(
+			cacheNames.map( cacheNameKey => {
+				if (cacheNameKey != cacheName) {
+					return caches.delete(cacheNameKey);
+				}
+			})
+		);
+	})
+	);
+});
+							</code></pre>
+							<aside class="notes"></aside>
+						</section>	
 					</section>
 
 					<section>
