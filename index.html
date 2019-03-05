@@ -305,10 +305,18 @@ if (navigator.serviceWorker) {
 				</section>
 
 				<section>
-					<h3>Service Worker events</h3>
+					<h3>Service Worker file</h3>
 					<code>/serviceworker.js</code>
 					<section>
-							<pre><code class="javascript" data-trim data-noescape>
+						<h3>Versioned cache name</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+const version = 'v0.1;
+const cacheName = 'MySWCache' + version;
+						</code></pre>
+					</section>
+					<section>
+						<h3>Events</h3>
+						<pre><code class="javascript" data-trim data-noescape>
 addEventListener('install', installEvent => {// …});
 
 addEventListener('activate', activateEvent => {// …});
