@@ -330,7 +330,7 @@ addEventListener('install', installEvent => {
 	// Cache stuff for later
 });
 
-addEventListener('activate', function (event) {
+addEventListener('activate', activateEvent => {
 	// Cleanup caches
 });
 
@@ -377,7 +377,7 @@ addEventListener('install', installEvent => {
 						<h2>Activate event</h2>
 						<section>
 							<pre><code class="javascript" data-trim data-noescape>
-addEventListener('activate', function (event) {
+addEventListener('activate', activateEvent => {
 	// Cleanup caches
 });
 							</code></pre>
