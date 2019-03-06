@@ -228,10 +228,12 @@ var promise = new Promise((resolve, reject) => {
 					<section>
 						<h3>Using a Promise</h3>
 						<pre><code class="javascript" data-trim data-noescape>
-promise.then((result) => {
-	console.log(result); // "Stuff worked!"
-}, (error) => {
-	console.log(error); // Error: "It broke"
+promise
+.then(result => {
+	console.log(result); // "It worked!"
+})
+.catch(error => {
+	console.log(error); // Error: "It broke."
 });
 						</code></pre>
 					</section>
@@ -261,7 +263,8 @@ promise.then((result) => {
 						<h3><code>Caches</code> property</h3>
 						<h4>(instance of CacheStorage)</h4>
 						<pre><code class="javascript" data-trim data-noescape>
-caches.open(cacheName).then(cache => {
+caches.open(cacheName)
+.then(cache => {
 	// Do something with your cache
 });
 						</code></pre>
@@ -269,20 +272,22 @@ caches.open(cacheName).then(cache => {
 					</section>
 
 					<section>
-						<h3>Cache object</h3>
+						<h3>Cache methods</h3>
 						<ul>
-							<li class="fragment"><code>cache.add()</code></li>
-							<li class="fragment"><code>cache.put()</code></li>
-							<li class="fragment"><code>cache.match()</code></li>
-							<li class="fragment"><code>cache.keys()</code></li>
-							<li class="fragment"><code>cache.delete()</code></li>
+							<li><code>cache.add()</code></li>
+							<li><code>cache.put()</code></li>
+							<li><code>cache.match()</code></li>
+							<li><code>cache.keys()</code></li>
+							<li><code>cache.delete()</code></li>
 						</ul>
+						<p><small><a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">developer.mozilla.org/en-US/docs/Web/API/Cache</a></small></p>
 					</section>
 
 					<section>
-						<h3>Add offline HTML file to cache</h3>
+						<h3>Add single offline HTML file to cache</h3>
 						<pre><code class="javascript" data-trim data-noescape>
-caches.open(cacheName).then(cache => {
+caches.open(cacheName)
+.then(cache => {
 	return cache.add('offline.html');
 })
 						</code></pre>
@@ -292,15 +297,26 @@ caches.open(cacheName).then(cache => {
 				<section>
 						<h2>Fetch API</h2>
 						<section>
-<pre><code class="javascript" data-trim data-noescape>
+							<pre><code class="javascript" data-trim data-noescape>
+									fetch(request)
+									.then(responseFromFetch => {
+										console.log(responseFromFetch); // "It fetched the thing!"
+									})
+									.catch(error => {
+										console.log(error); // Error: "It failed."
+									});
+							</code></pre>
+						</section>
+						<section>
+							<pre><code class="javascript" data-trim data-noescape>
 fetch('http://example.com/movies.json')
-.then(response => {
-	return response.json();
+.then(responseFromFetch => {
+	return responseFromFetch.json();
 })
 .then(myJson => {
 	console.log(JSON.stringify(myJson));
 });
-</code></pre>
+							</code></pre>
 						</section>
 				</section>
 
@@ -458,12 +474,14 @@ addEventListener('activate', function (event) {
 
 					<section>
 						<h2>Fetch event</h2>
-						<pre><code class="javascript" data-trim data-noescape>
+						<section>
+							<pre><code class="javascript" data-trim data-noescape>
 addEventListener('fetch', fetchEvent => {
 	// Return fetched or cached stuff
 });
 						</code></pre>
 						<aside class="notes"></aside>
+						</section>
 					</section>
 
 				<section>
