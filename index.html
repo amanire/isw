@@ -240,20 +240,68 @@ promise.then((result) => {
 				<section>
 					<h2>Promise-based APIs</h2>
 					<ul>
-						<li class="fragment">Fetch API</li>
 						<li class="fragment">Cache API</li>
+						<li class="fragment">Fetch API</li>
 					</ul>
 				</section>
 
 				<section>
 					<h2>Cache API</h2>
-					<ul>
-						<li class="fragment"><code>cachestorage.open()</code></li>
-						<li class="fragment"><code>cache.put()</code></li>
-						<li class="fragment"><code>cache.match()</code></li>
-						<li class="fragment"><code>cache.keys()</code></li>
-						<li class="fragment"><code>cache.delete()</code></li>
-					</ul>
+					<section>
+						<h3>Understanding Cache Lifetimes</h3>
+							<blockquote class="fragment">Cache instances are not part of the browser’s HTTP cache…</blockquote>
+							<blockquote class="fragment">Updates must be manually managed</blockquote>
+							<div class="fragment">
+								<blockquote>authors should version their caches by name…</blockquote>
+								<small><a href="https://w3c.github.io/ServiceWorker/#cache-lifetimes">w3c.github.io/ServiceWorker/#cache-lifetimes</a></small>
+							</div>
+					</section>
+
+					<section>
+						<h3><code>Caches</code> property</h3>
+						<h4>(instance of CacheStorage)</h4>
+						<pre><code class="javascript" data-trim data-noescape>
+caches.open(cacheName).then(cache => {
+	// Do something with your cache
+});
+						</code></pre>
+						<small><a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/caches">developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/caches</a></small>
+					</section>
+
+					<section>
+						<h3>Cache object</h3>
+						<ul>
+							<li class="fragment"><code>cache.add()</code></li>
+							<li class="fragment"><code>cache.put()</code></li>
+							<li class="fragment"><code>cache.match()</code></li>
+							<li class="fragment"><code>cache.keys()</code></li>
+							<li class="fragment"><code>cache.delete()</code></li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Add offline HTML file to cache</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+caches.open(cacheName).then(cache => {
+	return cache.add('offline.html');
+})
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+						<h2>Fetch API</h2>
+						<section>
+<pre><code class="javascript" data-trim data-noescape>
+fetch('http://example.com/movies.json')
+.then(response => {
+	return response.json();
+})
+.then(myJson => {
+	console.log(JSON.stringify(myJson));
+});
+</code></pre>
+						</section>
 				</section>
 
 				<section>
