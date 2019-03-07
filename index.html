@@ -480,12 +480,57 @@ addEventListener('activate', function (event) {
 					<section>
 						<h2>Fetch event</h2>
 						<section>
+							<h3>Caching strategy</h3>
 							<pre><code class="javascript" data-trim data-noescape>
 addEventListener('fetch', fetchEvent => {
-	// Return fetched or cached stuff
+	// - Fetch HTML file from network
+	//   If error, return offline fallback
+	// - Get all other assets from cache
+	//   If not in cache, fetch from network
 });
 						</code></pre>
 						<aside class="notes"></aside>
+						</section>
+
+						<section>
+							<pre><code class="javascript" data-trim data-noescape>
+addEventListener('fetch', fetchEvent => {
+	// - Fetch HTML file from network
+	const request = fetchEvent.request;
+	if(request.headers.get('Accept').includes('text/html')) {
+		fetchEvent.respondWith(
+			fetch(request)
+			.then(responseFromFetch => {
+				return responseFromFetch;
+			})
+			// If error, return offline fallback
+			.catch(error => {
+				return caches.match('/offline.html');
+			})
+		);
+		return;
+	}
+	// …
+							</code></pre>
+							<aside class="notes"></aside>
+						</section>
+
+						<section>
+								<pre><code class="javascript" data-trim data-noescape>
+	// Get all other assets from cache
+	fetchEvent.respondWith(
+		caches.match(request)
+		.then(responseFromCache => {
+			if(responseFromCache) {
+				return responseFromCache;
+			}
+			// If not in cache, fetch from network
+			return fetch(request);
+		})
+	)
+});
+							</code></pre>
+							<aside class="notes"></aside>
 						</section>
 					</section>
 
