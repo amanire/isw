@@ -309,14 +309,18 @@ caches.open(cacheName)
 						</section>
 						<section>
 							<pre><code class="javascript" data-trim data-noescape>
-fetch('http://example.com/movies.json')
-.then(responseFromFetch => {
-	return responseFromFetch.json();
+fetch('https://api.github.com/users/amanire')
+.then(response => {
+	return response.json()
 })
-.then(myJson => {
-	console.log(JSON.stringify(myJson));
-});
+.then(data => {
+	console.log(data);
+})
+.catch(err => {
+	console.error(err);
+})
 							</code></pre>
+							<p><a href="/fetch-api.html">Demo</a></p>
 						</section>
 				</section>
 
