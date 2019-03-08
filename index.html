@@ -543,6 +543,20 @@ addEventListener('fetch', fetchEvent => {
 						</section>
 					</section>
 
+					<section>
+						<h3>Dynamic responsive image strategy</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+addEventListener('fetch', fetchEvent => {
+// Check if the image is a jpeg
+// Inspect the accept header for WebP support
+// If we support WebP
+//   Clone the request
+//   Build the return URL
+</code></pre>
+<small><a href="https://deanhume.com/service-workers-dynamic-responsive-images-using-webp-images/">deanhume.com/service-workers-dynamic-responsive-images-using-webp-images</a></small>
+						<aside class="notes"></aside>
+					</section>
+
 				<section>
 					<h2>Tips and Gotchas</h2>
 					<section>
