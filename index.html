@@ -562,7 +562,25 @@ addEventListener('fetch', fetchEvent => {
 					</section>
 
 					<section>
+						<h2>Caching strategy</h2>
+						<h3>Serve Cached assets on Time out</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+addEventListener('fetch', fetchEvent => {
+// - If the network fails or the response is not served before timeout,
+//   reject the network request and return the cached version.
+//
+// - Otherwise, fullfill the promise and
+//   return fetched file from network
+});
+					</code></pre>
+					<small><a href="https://serviceworke.rs/strategy-network-or-cache.html">https://serviceworke.rs/strategy-network-or-cache.html</a></small>
+					<aside class="notes"></aside>
+					</section>
+
+					<section>
+							<h2>Caching strategy</h2>
 							<h3>Dynamic responsive image strategy</h3>
+							<section>
 							<pre><code class="javascript" data-trim data-noescape>
 addEventListener('fetch', fetchEvent => {
 	// Check if the image is a jpeg
@@ -610,6 +628,7 @@ addEventListener('fetch', fetchEvent => {
 					<small><a href="https://deanhume.com/service-workers-dynamic-responsive-images-using-webp-images/">deanhume.com/service-workers-dynamic-responsive-images-using-webp-images</a></small>
 					<aside class="notes"></aside>
 				</section>
+			</section>
 
 				<section>
 					<h2>Tips and Gotchas</h2>
