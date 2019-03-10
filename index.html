@@ -504,7 +504,7 @@ addEventListener('fetch', fetchEvent => {
 						<section>
 							<pre><code class="javascript" data-trim data-noescape>
 addEventListener('fetch', fetchEvent => {
-	// - Fetch HTML file from network
+	// Fetch HTML file from network
 	const request = fetchEvent.request;
 	if(request.headers.get('Accept').includes('text/html')) {
 		fetchEvent.respondWith(
