@@ -607,17 +607,18 @@ addEventListener('fetch', fetchEvent => {
 				</section>
 
 					<section>
-							<h2>Don't wait 24 hrs to activate</h2>
+							<h2>Don't wait for user to reload</h2>
 							<section>
 								<p>Force the new waiting service worker to become the active service worker</p>
 								<p><small><a href="https://davidwalsh.name/service-worker-claim">davidwalsh.name/service-worker-claim</a></small></p>
 							</section>
 							<section>
-								<h3>Chain SkipWaiting() to Install event</h3>
+								<h3>Add SkipWaiting() to Install event</h3>
 								<pre><code class="javascript" data-trim data-noescape>
 addEventListener('install', event => {
 	event.waitUntil(
 		addEventListener('install', installEvent => {
+			<mark>skipWaiting();</mark>
 			installEvent.waitUntil(
 				caches.open(cacheName)
 				.then(cache => {
@@ -626,9 +627,6 @@ addEventListener('install', event => {
 						'styles.css'
 					]);
 				})
-			<mark>.then( () => {
-				skipWaiting()
-			})</mark>
 	);
 });
 							</section>
