@@ -232,6 +232,22 @@ promise
 					</section>
 
 					<section>
+						<h3>Promises can be chained</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+promise
+.then(result => {
+	console.log(result); // "It worked!"
+})
+<mark>.then(data => {
+	console.log(data); // "Do something afterwards."
+})</mark>
+.catch(error => {
+	console.log(error); // Error: "It broke."
+});
+						</code></pre>
+					</section>
+
+					<section>
 						<h2>Promise-based APIs</h2>
 						<ul>
 							<li>Cache API</li>
