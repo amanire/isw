@@ -354,7 +354,7 @@ fetch('https://api.github.com/users/amanire')
 					<section>
 <pre><code class="javascript" data-trim data-noescape>
 &lt;script&gt;
-if (navigator.serviceWorker) {
+if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('/serviceworker.js');
 }
 &lt;/script&gt;
