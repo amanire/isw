@@ -1,4 +1,4 @@
-const version = 'v0.01';
+const version = 'v0.02';
 const staticCacheName = version + 'staticfiles';
 
 addEventListener('install', installEvent => {
@@ -25,12 +25,22 @@ addEventListener('install', installEvent => {
   );
 });
 
-addEventListener('activate', function (event) {
-  console.log('The service worker is activated.');
+addEventListener('activate', function (activateEvent) {
+  activateEvent.waitUntil(
+    caches.keys()
+    .then(cacheNames => {
+      return Promise.all(
+        cacheNames.map( cacheNameKey => {
+          if (cacheNameKey != staticCacheName) {
+            return caches.delete(cacheNameKey);
+          }
+        })
+      );
+    })
+  );
 });
 
 addEventListener('fetch', fetchEvent => {
-  console.log('The service worker is listening.');
   const request = fetchEvent.request;
   if(request.headers.get('Accept').includes('text/html')) {
     fetchEvent.respondWith(
