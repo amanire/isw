@@ -1,4 +1,4 @@
-const version = 'v0.02';
+const version = 'v0.03';
 const staticCacheName = version + 'staticfiles';
 
 addEventListener('install', installEvent => {
@@ -49,7 +49,7 @@ addEventListener('fetch', fetchEvent => {
         return responseFromFetch;
       })
       .catch(error => {
-        return caches.match('/index.html');
+        return caches.match('index.html');
         })
     );
     return;
