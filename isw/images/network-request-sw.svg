@@ -39,7 +39,7 @@
       </text>
     </g>
     <text transform="matrix(1, 0, 0, 1, 222.25, 67)">
-      <tspan x="-37.071" y="8.25" font-family="Helvetica" font-size="29" fill="#FFFFFF">Client</tspan>
+      <tspan x="-37.071" y="8.25" font-family="Helvetica" font-size="29" fill="#FFFFFF">Browser</tspan>
     </text>
     <g>
       <path d="M309.25,366.75 C272.661,366.75 243,337.089 243,300.5 C243,263.911 272.661,234.25 309.25,234.25 C345.839,234.25 375.5,263.911 375.5,300.5 C375.5,337.089 345.839,366.75 309.25,366.75 z" fill="#FA96FF"/>
@@ -51,7 +51,7 @@
         <path d="M154.171,103.25 C160.704,103.25 166,108.175 166,114.25 L166,265.5 C166,271.575 160.704,276.5 154.171,276.5 L39.828,276.5 C33.296,276.5 28,271.575 28,265.5 L28,114.25 C28,108.175 33.296,103.25 39.829,103.25 L154.171,103.25 z" fill-opacity="0" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
       </g>
       <text fill="#000000" transform="matrix(1, 0, -0, 1, 96.5, 189.375)">
-        <tspan x="-57.54" y="11.37" font-family="HelveticaNeue-Medium" font-size="30">Browser</tspan>
+        <tspan x="-57.54" y="11.37" font-family="HelveticaNeue-Medium" font-size="30">Window</tspan>
       </text>
     </g>
     <g>
