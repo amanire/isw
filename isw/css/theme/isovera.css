@@ -321,3 +321,12 @@ body {
   color: #000; }
 .title-slide a:hover {
   color: #fff; }
+
+@media (min-width: 600px) {
+  .two-column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 50px;
+    margin-bottom: 1em;
+  }
+}
