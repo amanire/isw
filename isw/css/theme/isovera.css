@@ -310,3 +310,14 @@ body {
   bottom: 0;
   right: 0;
   font-size: 0.5em !important; }
+
+.reveal a:hover img {
+  box-shadow: none; }
+
+/* Customizations for ISW deck */
+.title-slide.slide-background {
+  background-color: #ffcc00; }
+.title-slide a {
+  color: #000; }
+.title-slide a:hover {
+  color: #fff; }
