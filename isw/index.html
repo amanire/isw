@@ -75,6 +75,17 @@
 					</section>
 				</section>
 
+				<section>
+					<h2>What Problems do Service Workers solve?</h2>
+					<ul>
+						<li class="fragment">Offline experience</li>
+						<li class="fragment">Weak connections</li>
+						<li class="fragment">Reliance on strong continuous bandwidth</li>
+						<li class="fragment">Especially relevant for phones</li>
+					</ul>
+					<aside class="notes"></aside>
+				</section>
+
 			  <section>
 					<h2>Bounce rates</h2>
 					<img src="images/throbber.gif" style="max-height: 150px"/>
@@ -88,23 +99,10 @@
 				</section>
 
 				<section>
-					<h2>What Problems do Service Workers solve?</h2>
-					<ul>
-						<li class="fragment">Offline experience</li>
-						<li class="fragment">Weak connections</li>
-						<li class="fragment">Reliance on strong continuous bandwidth</li>
-						<li class="fragment">Especially relevant for phones</li>
-					</ul>
+					<h2>Waiting isn't Easy</h2>
+					<img src="images/waiting.png" />
+					<span class="attribution">Credit: Mo Williams</span>
 					<aside class="notes"></aside>
-				</section>
-
-				<section>
-					<h2>What Problems do Service Workers <em>not</em> solve?</h2>
-					<ul>
-						<li class="fragment">First visit experience</li>
-						<li class="fragment">Simplifying site maintenance</li>
-					</ul>
-					<aside class="notes">If the site is slow due to poor design or hosting limits, people will still bounce</aside>
 				</section>
 
 			  <section>
@@ -129,13 +127,6 @@
 				</section>
 
 				<section>
-					<h2>Waiting isn't Easy</h2>
-					<img src="images/waiting.png" />
-					<span class="attribution">Credit: Mo Williams</span>
-					<aside class="notes"></aside>
-				</section>
-
-				<section>
 					<h2>Request with Service Worker</h2>
 					<section>
 						<img src="images/network-request-sw.svg" />
@@ -155,6 +146,15 @@ addEventListener('fetch', fetchEvent => {
 						<aside class="notes"></aside>
 					</section>
 			  </section>
+
+				<section>
+					<h2>What Problems do Service Workers <em>not</em> solve?</h2>
+					<ul>
+						<li class="fragment">First visit experience</li>
+						<li class="fragment">Simplifying site maintenance</li>
+					</ul>
+					<aside class="notes">If the site is slow due to poor design or hosting limits, people will still bounce</aside>
+				</section>
 
 				<section>
 					<h2>Requirements</h2>
