@@ -1,4 +1,4 @@
-const version = 'v1.06';
+const version = 'v1.07';
 const staticCacheName = version + 'staticfiles';
 
 addEventListener('install', installEvent => {
@@ -9,7 +9,7 @@ addEventListener('install', installEvent => {
       return staticCache.addAll([
         'index.html',
         'images/isovera_logo_reverse.svg',
-        'fetch-api.htmle',
+        'fetch-api.html',
         'images/niko-lienata-1183354-unsplash.jpg',
         'js/reveal.js',
         'lib/font/source-sans-pro/source-sans-pro-semibolditalic.woff',
