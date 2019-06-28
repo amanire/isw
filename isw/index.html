@@ -80,7 +80,11 @@
 						<li class="fragment">Offline experience</li>
 						<li class="fragment">Weak connections</li>
 						<li class="fragment">Reliance on strong continuous bandwidth</li>
-						<li class="fragment">Especially relevant for phones</li>
+						<li class="fragment">Traffic to web servers</li>
+						<li class="fragment">Customer engagement via notifications (<a href="https://caniuse.com/#feat=push-api">limited support</a>)
+						</li>
+						<li class="fragment">Background sync (<a href="https://caniuse.com/#feat=background-sync">limited support</a>)
+						<li class="fragment">Need to support multiple native apps?</li>
 					</ul>
 					<aside class="notes"></aside>
 				</section>
@@ -150,7 +154,8 @@ addEventListener('fetch', fetchEvent => {
 					<h2>What Problems do Service Workers <em>not</em> solve?</h2>
 					<ul>
 						<li class="fragment">First visit experience</li>
-						<li class="fragment">Simplifying site maintenance</li>
+						<li class="fragment">Caching complexity</li>
+						<li class="fragment">Simplifying skillsets for site maintenance</li>
 					</ul>
 					<aside class="notes">If the site is slow due to poor design or hosting limits, people will still bounce</aside>
 				</section>
