@@ -259,10 +259,41 @@ promise
 					<section>
 						<h3>Promise-based APIs</h3>
 						<ul>
-							<li>Cache API</li>
 							<li>Fetch API</li>
+							<li>Cache API</li>
 						</ul>
 					</section>
+				</section>
+
+				<section>
+						<h2>Fetch API</h2>
+						<section>
+							<pre><code class="javascript" data-trim data-noescape>
+fetch(request)
+.then(responseFromFetch => {
+	console.log(responseFromFetch); // "It fetched the thing!"
+})
+.catch(error => {
+	console.log(error); // Error: "It failed."
+});
+							</code></pre>
+						</section>
+						<section>
+							<h3><small>Fetch user info from GitHub</small></h3>
+							<pre><code class="javascript" data-trim data-noescape>
+fetch('https://api.github.com/users/amanire')
+.then(response => {
+	return response.json()
+})
+.then(data => {
+	console.log(data);
+})
+.catch(err => {
+	console.error(err);
+})
+							</code></pre>
+							<p><a href="fetch-api.html">Demo</a></p>
+						</section>
 				</section>
 
 				<section>
@@ -320,38 +351,7 @@ caches.open(cacheName)
 						</code></pre>
 					</section>
 				</section>
-
-				<section>
-						<h2>Fetch API</h2>
-						<section>
-							<pre><code class="javascript" data-trim data-noescape>
-fetch(request)
-.then(responseFromFetch => {
-	console.log(responseFromFetch); // "It fetched the thing!"
-})
-.catch(error => {
-	console.log(error); // Error: "It failed."
-});
-							</code></pre>
-						</section>
-						<section>
-							<h3><small>Fetch user info from GitHub</small></h3>
-							<pre><code class="javascript" data-trim data-noescape>
-fetch('https://api.github.com/users/amanire')
-.then(response => {
-	return response.json()
-})
-.then(data => {
-	console.log(data);
-})
-.catch(err => {
-	console.error(err);
-})
-							</code></pre>
-							<p><a href="fetch-api.html">Demo</a></p>
-						</section>
-				</section>
-
+	
 				<section>
 					<h2>Building a Service Worker</h2>
 					<ul>
