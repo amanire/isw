@@ -1,4 +1,4 @@
-const version = 'v1.07';
+const version = 'v1.08';
 const staticCacheName = version + 'staticfiles';
 
 addEventListener('install', installEvent => {
@@ -8,19 +8,20 @@ addEventListener('install', installEvent => {
     .then( staticCache => {
       return staticCache.addAll([
         'index.html',
-        'images/isovera_logo_reverse.svg',
-        'fetch-api.html',
-        'images/niko-lienata-1183354-unsplash.jpg',
         'js/reveal.js',
         'lib/font/source-sans-pro/source-sans-pro-semibolditalic.woff',
+        'lib/font/source-sans-pro/source-sans-pro-semibold.woff',
+        'lib/font/source-sans-pro/source-sans-pro.css',
+        'lib/js/head.min.js',
         'css/reveal.css',
         'css/theme/isovera.css',
+        'images/isovera_logo_reverse.svg',
+        'images/niko-lienata-1183354-unsplash.jpg',
+        'images/google-chrome-pages-unresponsive.png',
         'images/throbber.gif',
         'images/network-request.svg',
         'images/network-request-sw.svg',
-        'lib/js/head.min.js',
-        'lib/font/source-sans-pro/source-sans-pro-semibold.woff',
-        'lib/font/source-sans-pro/source-sans-pro.css',
+        'fetch-api.html',
         'images/waiting.png',
         'images/letsencrypt-logo-horizontal.svg',
         'images/certbot-logo-1A.svg',
