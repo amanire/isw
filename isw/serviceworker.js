@@ -1,4 +1,4 @@
-const version = 'v1.00';
+const version = 'v1.01';
 const staticCacheName = version + 'staticfiles';
 
 addEventListener('install', installEvent => {
@@ -15,11 +15,14 @@ addEventListener('install', installEvent => {
         'css/theme/isovera.css',
         'images/throbber.gif',
         'images/network-request.svg',
+        'images/network-request-sw.svg',
         'lib/js/head.min.js',
         'lib/font/source-sans-pro/source-sans-pro-semibold.woff',
         'lib/font/source-sans-pro/source-sans-pro.css',
         'images/waiting.png',
-        'images/network-request-sw.svg',
+        'images/letsencrypt-logo-horizontal.svg',
+        'images/certbot-logo-1A.svg',
+        'images/pwa-lighthouse.png'
       ]);
     })
   );
