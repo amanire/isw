@@ -647,57 +647,17 @@ addEventListener('fetch', fetchEvent => {
 						<p>Set console context to Service Worker</p>
 						<aside class="notes"></aside>
 					</section>
-				</section>
 
 					<section>
-							<h2>Don't wait for user to reload</h2>
-							<section>
-								<p>Force the new waiting service worker to become the active service worker</p>
-								<p><small><a href="https://davidwalsh.name/service-worker-claim">davidwalsh.name/service-worker-claim</a></small></p>
-							</section>
-							<section>
-								<h3>Add SkipWaiting() to Install event</h3>
-								<pre><code class="javascript" data-trim data-noescape>
-addEventListener('install', event => {
-	event.waitUntil(
-		addEventListener('install', installEvent => {
-			<mark>skipWaiting();</mark>
-			installEvent.waitUntil(
-				caches.open(cacheName)
-				.then(cache => {
-					return cache.addAll([
-						'offline.html',
-						'styles.css'
-					]);
-				})
-	);
-});
-							</section>
-							</code></pre>
-
-							<section>
-									<h3>Chain clients.claim() to Activate event</h3>
-							<pre><code class="javascript" data-trim data-noescape>
-									addEventListener('activate', function (event) {
-										activateEvent.waitUntil(
-										caches.keys()
-										.then(cacheNames => {
-											return Promise.all(
-												cacheNames.map( cacheNameKey => {
-													if (cacheNameKey != cacheName) {
-														return caches.delete(cacheNameKey);
-													}
-												})
-											);
-										})
-										<mark>.then( () => {
-												clients.claim()
-										})</mark>
-										);
-									});
-							</code></pre>
-							<aside class="notes"></aside>
-						</section>
+						<h2>Don't wait for user to reload</h2>
+						<p>Force the new waiting service worker to become the active service worker</p>
+						<ul>
+							<li>Add SkipWaiting() to Install event</li>
+							<li>Chain clients.claim() to Activate event</li>
+						</ul>
+						<p><small><a href="https://davidwalsh.name/service-worker-claim">davidwalsh.name/service-worker-claim</a></small></p>
+						<aside class="notes"></aside>
+					</section>
 				</section>
 
 				<section>
