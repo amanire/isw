@@ -1,0 +1,150 @@
+/**
+ * CSS
+ */
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+:root {
+  --font-plain: 'Roboto', sans-serif;
+  --ratio: 1.8;
+  --bg-gradient: linear-gradient(to top right,#F77062, #FE5196);
+  --transition-duration: .2s;
+}
+
+body {
+  line-height: var(--ratio);
+  font-size: calc(.333vw + 1em);
+  font-family: var(--font-plain);
+  font-weight: 300;
+  background: #f9fafb;
+  margin: 0;
+}
+
+dl,
+dt,
+dd {
+  margin: 0;
+}
+
+.app-bar {
+  color: #ffffff;
+  height: 8rem;
+  background-image: var(--bg-gradient);
+  position: relative;
+}
+
+.app-bar__title {
+  font-size: 1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  z-index: 1;
+}
+
+.menu-icon {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 2em;
+}
+
+.container {
+  margin-bottom: .5rem;
+}
+
+.card {
+  cursor: pointer;
+  padding: 2rem 0;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  position: relative;
+  z-index: 1;
+}
+
+.is-expanded .card {
+  box-shadow: 0 1rem 1rem rgba(0,0,0,.25);
+}
+
+.user__picture {
+  float: left;
+  margin: 0 1.5rem 0;
+}
+
+.user__photo {
+  border-radius: 50%;
+}
+
+.user__name {
+  color: #F77062;
+}
+
+.user__location {
+  font-size: .75em;
+  color: #878787;
+}
+
+.drop-down-icon {
+  position: absolute;
+  right: 2rem;
+  transform: rotate(180deg);
+  transition-duration: var(--transition-duration);
+  transition-property: transform;
+  transition-timing-function: ease-out;
+}
+
+.is-expanded .drop-down-icon {
+  transform: rotate(0deg);
+  transition-duration: var(--transition-duration);
+  transition-property: transform;
+  transition-timing-function: ease-out;
+}
+
+.card__drawer {
+  clear: left;
+  display: flex;
+  font-size: .75em;
+  color: #fff;
+  flex-direction: row;
+  background-image: var(--bg-gradient);
+  margin: 0 1rem;
+  position: relative;
+  z-index: -5;
+  max-height: 0;
+  transition: max-height var(--transition-duration) ease-in-out;
+  overflow: hidden;
+}
+
+.is-expanded .card__drawer {
+  display: flex;
+  max-height: 5.5rem;
+  transition: max-height var(--transition-duration) ease-in-out;
+}
+
+.card__drawer-slot {
+  width: 50%;
+  text-align: center;
+  padding: 1rem 0;
+  border-right: 1px solid rgba(0,0,0,.1);
+}
+
+.card__drawer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
