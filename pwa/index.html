@@ -1,0 +1,777 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Intro to Service Workers</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="css/theme/isovera.css">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="icon" href="data:;base64,iVBORwOKGO=" />
+
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section class="title-slide">
+					<h2>An Introduction To</h2>
+					<h1>Service Workers</h1>
+					<p>Aaron Manire</p>
+					<p><small><a href="https://amanire.com/isw">https://amanire.com/isw</a></small></p>
+				</section>
+
+				<section>
+					<h2>What is a Service Worker?</h2>
+					<aside class="notes">So let's get right to it and start with what you're all probably wondering.
+						So… who or what exactly do you mean by a service worker?
+					</aside>
+				</section>
+
+				<section data-background-image="images/niko-lienata-1183354-unsplash.jpg" data-background-color="#000">
+					<div class="attribution">Photo by <a href="https://unsplash.com/photos/TyxvEjPzXgw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Niko Lienata</a> on Unsplash</div>
+				</section>
+
+				<section>
+					<h2>Web Workers API</h2>
+					<section>
+						<p><img src="images/google-chrome-pages-unresponsive.png"/></p>
+					</section>
+					<section>
+						<p><a href="https://www.w3.org/TR/workers/">w3.org/TR/workers/</a></p>
+					</section>
+					<section>
+						<blockquote>An API for running scripts in the background independently of any user interface scripts</blockquote>
+					</section>
+					<section>
+						<blockquote>Workers are expected to be long-lived, have a high start-up performance cost, and a high per-instance memory cost</blockquote>
+					</section>
+					<section>
+						<h3>Types of Web Workers</h3>
+						<ul>
+							<li class="fragment">Shared Workers</li>
+							<li class="fragment">Audio Workers</li>
+							<li class="fragment">Service Workers</li>
+						</ul>
+					<aside class="notes">Web Workers makes it possible to run a script operation in a background thread separate from the main execution thread of a web application. The advantage of this is that laborious processing can be performed in a separate thread, allowing the main (usually the UI) thread to run without being blocked/slowed down.</aside>
+					</section>
+				</section>
+
+				<section>
+					<h2>What Problems do Service Workers solve?</h2>
+					<ul>
+						<li class="fragment">Offline experience</li>
+						<li class="fragment">Weak connections</li>
+						<li class="fragment">Reliance on strong continuous bandwidth</li>
+						<li class="fragment">Traffic to web servers</li>
+						<li class="fragment">Customer engagement via notifications (<a href="https://caniuse.com/#feat=push-api">limited support</a>)
+						</li>
+						<li class="fragment">Background sync (<a href="https://caniuse.com/#feat=background-sync">limited support</a>)
+						<li class="fragment">Need to support multiple native apps?</li>
+					</ul>
+					<aside class="notes"></aside>
+				</section>
+
+			  <section>
+					<h2>Bounce rates</h2>
+					<img src="images/throbber.gif" style="max-height: 150px"/>
+					<h3>As page load time goes from:</h3>
+					<ul>
+						<li><strong>1s to 3s</strong> - probability of bounce &uarr; <strong>32%</strong></li>
+						<li class="fragment"><strong>1s to 5s</strong> - probability of bounce &uarr; <strong>90%</strong></li>
+						<li class="fragment"><strong>1s to 10s</strong> - probability of bounce &uarr; <strong>123%</strong></li>
+					</ul>
+					<p><small>Source: Google/SOASTA Research 2017</small></p>
+				</section>
+
+				<section>
+					<h2>Waiting isn't Easy</h2>
+					<img src="images/waiting.png" />
+					<span class="attribution">Credit: Mo Willems</span>
+					<aside class="notes"></aside>
+				</section>
+
+			  <section>
+					<h2>Typical Network Request</h2>
+					<section>
+						<img src="images/network-request.svg" />
+						<aside class="notes"></aside>
+					</section>
+
+					<section>
+						<h3>Failure and frustration</h3>
+						<ul>
+							<li class="fragment">No nearby cell tower</li>
+							<li class="fragment">Flaky Wifi</li>
+							<li class="fragment">Traffic spikes, e.g a major event</li>
+							<li class="fragment">ISP trouble</li>
+							<li class="fragment">Power outage</li>
+							<li class="fragment">Site server is down</li>
+						</ul>
+						<aside class="notes"></aside>
+					</section>
+				</section>
+
+				<section>
+					<h2>Request with Service Worker</h2>
+					<section>
+						<img style="margin-top: 1em;" src="images/network-request-sw.svg" />
+						<aside class="notes"></aside>
+					</section>
+
+					<section>
+						<h3>Fetch event</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+addEventListener('fetch', fetchEvent => {
+	// If fetch is successful, return results.
+	// …
+	// If fetch fails, return cached content.
+	// …
+});
+						</code></pre>
+						<aside class="notes"></aside>
+					</section>
+			  </section>
+
+				<section>
+					<h2>What Problems do Service Workers <em>not</em> solve?</h2>
+					<ul>
+						<li class="fragment">First visit experience</li>
+						<li class="fragment">Caching complexity</li>
+						<li class="fragment">Simplifying skillsets for site maintenance</li>
+					</ul>
+					<aside class="notes">If the site is slow due to poor design or hosting limits, people will still bounce</aside>
+				</section>
+
+				<section>
+					<h2>Requirements</h2>
+					<ul>
+						<li class="fragment">Compatible browser<br/>
+								See <a href="https://caniuse.com/#feat=serviceworkers">caniuse.com/#feat=serviceworkers</a>
+								<br/>
+								<small class="fragment">(Browsers that support Service Workers also support ES6.)</small>
+						</li>
+						<li class="fragment">HTTPS</li>
+						<li class="fragment">Same origin policy</li>
+					</ul>
+					<aside class="notes"></aside>
+				</section>
+
+				<section>
+					<h2>Service Worker Lifecycle</h2>
+					<section>
+					<h3>First site visit</h3>
+					<ol	>
+						<li class="fragment">Download</li>
+						<li class="fragment">Install</li>
+						<li class="fragment">Activate</li>
+					</ol	>
+					<aside class="notes"></aside>
+					</section>
+
+					<section>
+					<h3>Updated Service Worker</h3>
+					<ol	>
+						<li class="fragment">Download</li>
+						<li class="fragment">Install</li>
+						<li class="fragment"><strong>Waiting</strong><br/>
+							<small class="fragment">Until all windows or tabs are closed.</small>
+						</li>
+						<li class="fragment">Activate</li>
+					</ol	>
+					<aside class="notes"></aside>
+					</section>
+				</section>
+
+				<section>
+					<h2>Working asynchronously: Promise API</h2>
+					<section>
+						<p>A promise can either be fulfilled (resolved) or rejected.</p>
+						<small><a href="https://developers.google.com/web/fundamentals/primers/promises">developers.google.com/web/fundamentals/primers/promises</a></small>
+						<aside class="notes"></aside>
+					</section>
+
+					<section>
+					<h3>Creating a Promise</h3>
+					<pre><code class="javascript" data-trim data-noescape>
+var promise = new Promise((resolve, reject) => {
+	// Do something, e.g. fetch a file from the network.
+
+	if (/* everything turned out fine */) {
+		resolve("Stuff worked!");
+	}
+	else {
+		reject(Error("It broke"));
+	}
+});
+					</code></pre>
+					</section>
+
+					<section>
+						<h3>Using a Promise</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+promise
+.then(result => {
+	console.log(result); // "It worked!"
+})
+.catch(error => {
+	console.log(error); // Error: "It broke."
+});
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>Promises can be chained</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+promise
+.then(result => {
+	console.log(result); // "It worked!"
+})
+<mark>.then(data => {
+	console.log(data); // "Do something afterwards."
+})</mark>
+.catch(error => {
+	console.log(error); // Error: "It broke."
+});
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>Promise-based APIs</h3>
+						<ul>
+							<li>Fetch API</li>
+							<li>Cache API</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+						<h2>Fetch API</h2>
+						<section>
+							<pre><code class="javascript" data-trim data-noescape>
+fetch(request)
+.then(responseFromFetch => {
+	console.log(responseFromFetch); // "It fetched the thing!"
+})
+.catch(error => {
+	console.log(error); // Error: "It failed."
+});
+							</code></pre>
+						</section>
+						<section>
+							<h3><small>Fetch user info from GitHub</small></h3>
+							<pre><code class="javascript" data-trim data-noescape>
+fetch('https://api.github.com/users/amanire')
+.then(response => {
+	return response.json()
+})
+.then(data => {
+	console.log(data);
+})
+.catch(err => {
+	console.error(err);
+})
+							</code></pre>
+							<p><a href="fetch-api.html">Demo</a></p>
+						</section>
+				</section>
+
+				<section>
+					<h2>Cache API</h2>
+					<section>
+						<h3>Understanding Cache Lifetimes</h3>
+							<blockquote class="fragment">Cache instances are not part of the browser’s HTTP cache…</blockquote>
+							<blockquote class="fragment">Updates must be manually managed</blockquote>
+							<div class="fragment">
+								<blockquote>authors should version their caches by name…</blockquote>
+								<small><a href="https://w3c.github.io/ServiceWorker/#cache-lifetimes">w3c.github.io/ServiceWorker/#cache-lifetimes</a></small>
+							</div>
+					</section>
+
+					<section>
+						<h3>Browser Caching</h3>
+						<ol>
+							<li>Memory cache</li>
+							<li>Service Workers cache</li>
+							<li>Disk (HTTP) cache</li>
+						</ol>
+					</section>
+
+					<section>
+						<h3><code>Caches</code> property</h3>
+						<h4>(instance of CacheStorage)</h4>
+						<pre><code class="javascript" data-trim data-noescape>
+caches.open(cacheName)
+.then(cache => {
+	// Do something with your cache
+});
+						</code></pre>
+						<small><a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/caches">developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/caches</a></small>
+					</section>
+
+					<section>
+						<h3>Cache methods</h3>
+						<ul>
+							<li><code>cache.add()</code></li>
+							<li><code>cache.put()</code></li>
+							<li><code>cache.match()</code></li>
+							<li><code>cache.keys()</code></li>
+							<li><code>cache.delete()</code></li>
+						</ul>
+						<p><small><a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">developer.mozilla.org/en-US/docs/Web/API/Cache</a></small></p>
+					</section>
+
+					<section>
+						<h3>Add single offline HTML file to cache</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+caches.open(cacheName)
+.then(cache => {
+	return cache.add('offline.html');
+})
+						</code></pre>
+					</section>
+				</section>
+	
+				<section>
+					<h2>Building a Service Worker</h2>
+					<ul>
+						<li class="fragment">HTTPS (or <em>localhost</em> for development)</li>
+						<li class="fragment">Register service worker</li>
+						<li class="fragment">Service worker JavaScript file</li>
+						<li class="fragment">Caching strategy</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>HTTPS</h2>
+					<div class="two-column">
+						<div>
+							<img style="background-color: #fff; padding: 20px; max-height: none;" src="images/letsencrypt-logo-horizontal.svg"/><br/>
+							<div><small><a href="https://letsencrypt.org/">letsencrypt.org</a></small></div>
+						</div>
+						<div>
+							<img style="background-color: #fff; padding: 20px; width:300px; max-height: none;" src="images/certbot-logo-1A.svg">
+							<div><small><a href="https://certbot.eff.org/">certbot.eff.org</a></small></div>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2>Register Service Worker</h2>
+					<code>/index.html</code>
+
+					<section>
+						<p>via inline script tag</p>
+					</section>
+
+					<section>
+<pre><code class="javascript" data-trim data-noescape>
+&lt;script&gt;
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('/serviceworker.js');
+}
+&lt;/script&gt;
+</code></pre>
+					<p class='fragment'>No modern JavaScript here!</p>
+					</section>
+
+					<section>
+						<h3>Progressive enhancement</h3>
+						<p>Service worker file is ignored if unsupported by browser.</p>
+					</section>
+
+					<section>
+						<h3>Scope</h3>
+<pre class="fragment"><code class="javascript" data-trim data-noescape>
+&lt;script&gt;
+if (navigator.serviceWorker) {
+	navigator.serviceWorker.register('/serviceworker.js',
+	<mark>{scope: '/app/'}</mark>
+	);
+}
+&lt;/script&gt;
+</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<h3>Service Worker file</h3>
+					<code>/serviceworker.js</code>
+					<section>
+						<h3>Versioned cache name</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+const version = 'V0.1';
+const cacheName = 'MySWCache' + version;
+						</code></pre>
+					</section>
+					<section>
+						<h3>Events</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+addEventListener('install', installEvent => {// …});
+
+addEventListener('activate', activateEvent => {// …});
+
+addEventListener('fetch', fetchEvent => {// …});
+							</code></pre>
+						</section>
+						<section>
+							<pre><code class="javascript" data-trim data-noescape>
+addEventListener('install', installEvent => {
+	// Cache stuff for later
+});
+
+addEventListener('activate', activateEvent => {
+	// Cleanup caches
+});
+
+addEventListener('fetch', fetchEvent => {
+	// Return fetched or cached stuff
+});
+							</code></pre>
+						</section>
+					</section>
+
+					<section>
+						<h2>Install event</h2>
+						<section>
+							<pre><code class="javascript" data-trim data-noescape>
+	addEventListener('install', installEvent => {
+	// Cache stuff for later
+	});
+							</code></pre>
+							<aside class="notes"></aside>
+						</section>
+
+					<section>
+							<pre><code class="javascript" data-trim data-noescape>
+// cacheName == 'MySWCacheV0.1'
+							</code></pre>
+							<pre><code class="javascript" data-trim data-noescape>
+addEventListener('install', installEvent => {
+	installEvent.waitUntil(
+    caches.open(cacheName)
+    .then(cache => {
+      return cache.addAll([
+        'offline.html',
+        'styles.css'
+      ]);
+    })
+  );
+});
+							</code></pre>
+							<aside class="notes"></aside>
+						</section>
+					</section>
+
+					<section>
+						<h2>Activate event</h2>
+						<section>
+							<pre><code class="javascript" data-trim data-noescape>
+addEventListener('activate', activateEvent => {
+	// Cleanup caches
+});
+							</code></pre>
+							<aside class="notes"></aside>
+						</section>
+
+						<section>
+								<pre><code class="javascript" data-trim data-noescape>
+	// Delete old cacheName != 'MySWCacheV0.1'
+								</code></pre>
+							<pre><code class="javascript" data-trim data-noescape>
+addEventListener('activate', function (event) {
+	activateEvent.waitUntil(
+	caches.keys()
+	.then(cacheNames => {
+		return Promise.all(
+			cacheNames.map( cacheNameKey => {
+				if (cacheNameKey != cacheName) {
+					return caches.delete(cacheNameKey);
+				}
+			})
+		);
+	})
+	);
+});
+							</code></pre>
+							<aside class="notes"></aside>
+						</section>
+					</section>
+
+					<section>
+						<h2>Fetch event</h2>
+						<section>
+							<h3>Fresh HTML, cached assets</h3>
+							<pre><code class="javascript" data-trim data-noescape>
+addEventListener('fetch', fetchEvent => {
+	// - Fetch HTML file from network
+	//   If error, return offline fallback
+	//
+	// - Get all other assets from cache
+	//   If not in cache, fetch from network
+});
+						</code></pre>
+						<aside class="notes"></aside>
+						</section>
+
+						<section>
+							<pre><code class="javascript" data-trim data-noescape>
+addEventListener('fetch', fetchEvent => {
+	// Fetch HTML file from network
+	const request = fetchEvent.request;
+	if(request.headers.get('Accept').includes('text/html')) {
+		fetchEvent.respondWith(
+			fetch(request)
+			.then(responseFromFetch => {
+				return responseFromFetch;
+			})
+			// If error, return offline fallback
+			.catch(error => {
+				return caches.match('/offline.html');
+			})
+		);
+		return;
+	}
+	// …
+							</code></pre>
+							<aside class="notes"></aside>
+						</section>
+
+						<section>
+								<pre><code class="javascript" data-trim data-noescape>
+	// Get all other assets from cache
+	fetchEvent.respondWith(
+		caches.match(request)
+		.then(responseFromCache => {
+			if(responseFromCache) {
+				return responseFromCache;
+			}
+			// If not in cache, fetch from network
+			return fetch(request);
+		})
+	)
+});
+							</code></pre>
+							<aside class="notes"></aside>
+						</section>
+					</section>
+
+					<section>
+						<h2>Caching strategy</h2>
+						<h3>Serve cached assets on time out</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+addEventListener('fetch', fetchEvent => {
+// - If the network fails or the response is not served before timeout,
+//   reject the network request and return the cached version.
+//
+// - Otherwise, fullfill the promise and
+//   return fetched file from network
+});
+					</code></pre>
+					<small><a href="https://serviceworke.rs/strategy-network-or-cache.html">serviceworke.rs/strategy-network-or-cache.html</a></small>
+					<aside class="notes"></aside>
+					</section>
+
+					<section>
+						<h2>Caching strategy</h2>
+						<h3>Dynamic responsive image strategy</h3>
+						<pre><code class="javascript" data-trim data-noescape>
+addEventListener('fetch', fetchEvent => {
+  // Clone the request
+	// Check if the image is a jpeg
+	//   Inspect the accept header for WebP support
+	//   If we support WebP
+	//     Build the return URL
+});
+		</code></pre>
+							<small><a href="https://deanhume.com/service-workers-dynamic-responsive-images-using-webp-images/">deanhume.com/service-workers-dynamic-responsive-images-using-webp-images</a></small>
+						<aside class="notes"></aside>
+					</section>
+
+				<section>
+					<h2>Tips and Gotchas</h2>
+					<section>
+						<h3>Chrome developer tools</h3>
+						<p><a href="https://www.chromium.org/blink/serviceworker/service-worker-faq">chromium.org/blink/serviceworker/service-worker-faq</a></p>
+					</section>
+
+					<section>
+						<h3>Developer tools</h3>
+						<p>Set console context to Service Worker</p>
+						<aside class="notes"></aside>
+					</section>
+
+					<section>
+						<h3>Don't wait for user to reload</h3>
+						<p>Force the new waiting service worker to become the active service worker</p>
+						<ul>
+							<li>Add SkipWaiting() to Install event</li>
+							<li>Chain clients.claim() to Activate event</li>
+						</ul>
+						<p><small><a href="https://davidwalsh.name/service-worker-claim">davidwalsh.name/service-worker-claim</a></small></p>
+						<aside class="notes"></aside>
+					</section>
+
+					<section>
+						<h3>Lighthouse</h3>
+						<img src="images/pwa-lighthouse.png" style="height:150px; width:auto;">
+						<p>Audits for performance, accessibility, progressive web apps, and more.</p>
+						<p><small><a href="https://developers.google.com/web/tools/lighthouse/">developers.google.com/web/tools/lighthouse/</a></small></p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Progressive Web Apps</h2>
+					<section>
+						<div class="two-column" style="margin-bottom: 1em;">
+							<div>
+								<ul>
+										<li>Responsive</li>
+										<li>Connectivity independent</li>
+										<li>App-like-interactions</li>
+										<li>Fresh</li>
+									</ul>
+								</div>
+								<div>
+									<ul>
+											<li>Safe</li>
+											<li>Discoverable</li>
+											<li>Re-engageable</li>
+											<li>Installable</li>
+											<li>Linkable</li>
+										</ul>
+									</div>
+								</div>
+						<p><small>Alew Russell & Frances Berriman<br/>
+							<a href="https://infrequently.org/2015/06/progressive-apps-escaping-tabs-without-losing-our-soul/">infrequently.org/2015/06/progressive-apps-escaping-tabs-without-losing-our-soul/</a></small></p>
+					</section>
+					<section>
+						<h3>Any site can be a PWA</h3>
+						<ul>
+							<li>HTTPS</li>
+							<li>Service Worker</li>
+							<li>Manifest JSON file</li>
+						</ul>
+						<p><small>Jeremey Keith<br/>
+							<a href="https://adactio.com/journal/13884">adactio.com/journal/13884</a></small>
+						</p>
+						<aside class="notes"></aside>
+					</section>
+				</section>
+				<section>
+					<h2>Drupal Solutions</h2>
+					<section>
+						<h3>Offline Core</h3>
+						<p><small><a href="https://events.drupal.org/vienna2017/sessions/offline-core">events.drupal.org/vienna2017/sessions/offline-core</a></small></p>
+						<p class="fragment">Add a progressive web app module to core<br/>
+						<small><a href="https://www.drupal.org/project/ideas/issues/2830668">drupal.org/project/ideas/issues/2830668</a></small></p>
+					</section>
+					<section>
+						<h3>Service Worker module</h3>
+						<p>Abandoned, no official release</p>
+						<p><small><a href="https://www.drupal.org/project/serviceworker">drupal.org/project/serviceworker</a></small></p>
+					</section>
+					<section>
+						<h3>Service Worker Registration module</h3>
+						<p>8.x-1.0 Release, single maintainer</p>
+						<p><small><a href="https://www.drupal.org/project/sw_register">drupal.org/project/sw_register</a></small></p>
+					</section>
+					<section>
+						<h3>Progressive Web App module</h3>
+						<p><small><a href="https://www.drupal.org/project/pwa">drupal.org/project/pwa</a></small></p>
+						<p class="fragment">Fully working D8 version based on D7 Serviceworker<br/>
+							<small><a href="https://www.drupal.org/project/pwa/issues/3060759">drupal.org/project/pwa/issues/3060759</a></small>
+						</p>
+					</section>
+					<section>
+						<h3>Advanced Progressive Web App module</h3>
+						<p>8.x-1.0 Release, incorporates push notifications</p>
+						<p><small><a href="https://www.drupal.org/project/advanced_pwa">drupal.org/project/advanced_pwa</a></small></p>
+					</section>
+				</section>
+
+					<section>
+					<h2>Resources</h2>
+					<section data-markdown>
+						<textarea data-template>
+					- Offline Web Applications by Google
+					<small>[udacity.com/course/offline-web-applications--ud899](https://udacity.com/course/offline-web-applications--ud899)</small>
+					- Service Workers: an Introduction
+					<small>[developers.google.com/web/fundamentals/primers/service-workers/](https://developers.google.com/web/fundamentals/primers/service-workers/)</small>
+					- Dean Hume's blog posts  
+					<small>[deanhume.com/tag/service-workers/](https://deanhume.com/tag/service-workers/)</small>
+					- W3C Service Workers Nightly draft specification
+					<small>[w3c.github.ioServiceWorker](https://w3c.github.io/ServiceWorker/)</small>
+				</textarea>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>
+					### Caching Strategies and PWAs
+					- Service Workers Cookbook by Mozilla  
+					<small>[serviceworke.rs](https://serviceworke.rs/)</small>
+					- The Offline Cookbook by Jake Archibald (Google)  
+					<small>[jakearchibald.com/2014/offline-cookbook](https://jakearchibald.com/2014/offline-cookbook/)</small>
+					- Workbox: JavaScript Libraries for adding offline support to web apps  
+					<small>[developers.google.com/web/tools/workbox/](https://developers.google.com/web/tools/workbox/)</small>
+					- Progressive Web Apps on Windows  
+					<small>[docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps](https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps)</small>
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+					### In Print
+					- _Going Offline_ by Jeremy Keith  
+					<small>[abookapart.com/products/going-offline](https://abookapart.com/products/going-offline)</small>
+					- _Smashing Book #6: Building An Advanced Service Worker_ by Lyza Gardner  
+					<small>[smashingmagazine.com/printed-books](https://www.smashingmagazine.com/printed-books)</small>
+					- _Progressive Web Apps by_ by Jason Grigsby  
+					<small>[abookapart.com/products/progressive-web-apps](https://abookapart.com/products/progressive-web-apps)</small>
+					- _Building Progressive Web Apps_ by Tal Ater  
+					<small>[shop.oreilly.com/product/0636920052067.do](http://shop.oreilly.com/product/0636920052067.do)</small>
+						</textarea>
+					</section>
+				</section>
+
+				<section>
+					<h2>Thank you</h2>
+					<p><a href="https://amanire.com/isw">amanire.com/isw</a></p>
+					<p>Aaron Manire</p>
+					<p><small><a href="https://twitter.com/amanire">@amanire</a></small><br/>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); hljs.configure({tabReplace: '  '}) }}
+				]
+			});
+
+			if (navigator.serviceWorker && !navigator.serviceWorker.controller) {
+				navigator.serviceWorker.register('/isw/serviceworker.js',
+				{scope: '/isw/'}
+				);
+			}
+		</script>
+	</body>
+</html>
