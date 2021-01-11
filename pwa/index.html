@@ -73,7 +73,7 @@ Notes:
 - Interactivity
 - Personalized
 - URLs are deprioritized
-- XHR
+- XHR/AJAX
 - Software as a Service (SaaS)
 - Examples
   - Gmail
@@ -102,26 +102,34 @@ Notes:
   </textarea>
 </section>
 
-<section data-markdown>
-  <textarea type="text/template">
-## Compile to native
+<section>
+  <h2>Compile to native</h2> 
+  <section data-markdown>
+    <textarea type="text/template">
+### Mobile
 
-- Mobile
-  - PhoneGap
-  - React Native
-  - NativeScript
-  - Flutter
-  - Ionic
-- Desktop
-  - Electron www.electronjs.org
-  - Proton Native
+- PhoneGap
+- React Native
+- NativeScript
+- Flutter
+- Ionic
+    </textarea>
+  </section>
+  <section data-markdown>
+    <textarea type="text/template">
+### Desktop
+
+- Electron www.electronjs.org
+- Proton Native
+
 Notes:
-  - Electron 
-    - Slack
-    - Skype
-    - Visual Studio Code
-    - Windows 95
-  </textarea>
+- Electron 
+- Slack
+- Skype
+- Visual Studio Code
+- Windows 95
+    </textarea>
+  </section>
 </section>
 
 <section data-markdown>
@@ -187,6 +195,37 @@ Notes:
   </textarea>
 </section>
 
+<section>
+  <h2>Tools and Resources</h2> 
+  <section data-markdown>
+    <textarea type="text/template">
+### Chrome developer tools
+
+[chromium.org/blink/serviceworker/service-worker-faq](https://chromium.org/blink/serviceworker/service-worker-faq)
+    </textarea>
+  </section>
+  <section>
+    <h3>Lighthouse</h3>
+    <img src="images/pwa-lighthouse.png" style="height:150px; width:auto;">
+    <p>Audits for performance, accessibility, progressive web apps, and more.</p>
+    <p><small><a href="https://developers.google.com/web/tools/lighthouse/">developers.google.com/web/tools/lighthouse/</a></small></p>
+  </section>
+  <section>
+    <img src="images/workbox-logo.svg" style="height:150px; width:auto;">
+    <p>A set of libraries that can power a production-ready service worker for your Progressive Web App.</p>
+    <p><small><a href="https://developers.google.com/web/tools/workbox/">developers.google.com/web/tools/workbox/</a></small></p>
+  </section>
+  <section data-markdown>
+    <textarea type="text/template">
+![](images/superpwa-logo.png)
+
+SuperPWA Wordpress plugin
+
+[superpwa.com](https://superpwa.com)
+    </textarea>
+  </section>
+</section>
+
 <section data-markdown>
   <textarea type="text/template">
 ## PWAs gone bad
@@ -198,7 +237,8 @@ Notes:
 - External URLs in standalone mode
 
 Notes:
-  - XXX
+  - Gatsby Starter
+  - Create React App
   </textarea>
 </section>
 
@@ -220,16 +260,19 @@ Notes:
   <textarea type="text/template">
 ## Elephant in the room: Safari
 
+- App Clips https://developer.apple.com/app-clips/
 - Arbitrary cache clearing
 - APIs
   - push notificationsz
   - Background sync
   - …
 
-- XXX
+  Steve Jobs when launching the iPhone:
+
+> Our innovative approach, using Web 2.0-based standards, lets developers create amazing new applications while keeping the iPhone secure and reliable.
 
 Notes:
-  - XXX
+  - App Clips introduced at Apple's developer conference in June 2020
   </textarea>
 </section>
 
@@ -262,7 +305,7 @@ Notes:
 
 <section>
   <h2>Thank you</h2>
-  <p><a href="https://amanire.com/isw">amanire.com/isw</a></p>
+  <p><a href="https://amanire.com/pwa">amanire.com/pwa</a></p>
   <p>Aaron Manire</p>
   <p><small><a href="https://twitter.com/amanire">@amanire</a></small><br/>
 </section>
