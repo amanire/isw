@@ -320,33 +320,6 @@ navigator.serviceWorker.register('/serviceworker.js',
     <img style="margin-top: 1em;" src="images/network-request-sw.svg" />
     <aside class="notes"></aside>
   </section>
-  <section>
-<p>Caching Strategy: Stale while revalidate</p>
-<img src="images/stale-while-revalidate.png"/>
-<small>Source: <a href="https://web.dev/offline-cookbook">The Offline Cookbook</a> by Jake Archibald</small>
-
-<aside class="notes">Ideal for: frequently updating resources where having the very latest version is non-essential. Avatars can fall into this category.
-
-If there's a cached version available, use it, but fetch an update for next time.
-</aside>
-    </textarea>
-  </section>
-  <section>
-<p>Cache First (Cache Falling Back to Network)</p>
-<img src="images/cache-first.png"/>
-<small>Source: <a href="https://web.dev/offline-cookbook">The Offline Cookbook</a> by Jake Archibald</small>
-
-<aside class="notes">Ideal for: building offline-first. In such cases, this is how you'll handle the majority of requests. Other patterns will be exceptions based on the incoming request.
-</aside>
-  </section>
-  <section>
-<h3>Network or cache</h3>
-<p><a href="https://serviceworke.rs/strategy-network-or-cache_demo.html">Demo</a></p>
-<small>Source: <a href="https://serviceworke.rs/strategy-network-or-cache.html">The Service Worker Cookbook</a> by Mozilla</small>
-
-<aside class="notes">The service worker in this recipe tries to retrieve the most up to date content from the network but if the network is taking too long, it will serve cached content instead.
-</aside>
-  </section>
 </section>
 
 <section>
@@ -354,6 +327,8 @@ If there's a cached version available, use it, but fetch an update for next time
   <section data-markdown>
     <textarea type="text/template">
 ### Certificate Authority
+
+Organization and extended validation of certificates.
 
 ![](images/entrust-ca-logo.svg)
     </textarea>
@@ -374,6 +349,37 @@ If there's a cached version available, use it, but fetch an update for next time
     <textarea type="text/template">
 or localhost for development
     </textarea>
+  </section>
+</section>
+
+<section>
+  <h2>SW Caching Strategies</h2>
+  <section>
+    <p>Stale while revalidate</p>
+    <img src="images/stale-while-revalidate.png"/>
+    <small>Source: <a href="https://web.dev/offline-cookbook">The Offline Cookbook</a> by Jake Archibald</small>
+
+    <aside class="notes">Ideal for: frequently updating resources where having the very latest version is non-essential. Avatars can fall into this category.
+
+    If there's a cached version available, use it, but fetch an update for next time.
+    </aside>
+    </textarea>
+  </section>
+  <section>
+    <p>Cache First (Cache Falling Back to Network)</p>
+    <img src="images/cache-first.png"/>
+    <small>Source: <a href="https://web.dev/offline-cookbook">The Offline Cookbook</a> by Jake Archibald</small>
+
+    <aside class="notes">Ideal for: building offline-first. In such cases, this is how you'll handle the majority of requests. Other patterns will be exceptions based on the incoming request.
+    </aside>
+  </section>
+  <section>
+    <h3>Network or cache</h3>
+    <p><a href="https://serviceworke.rs/strategy-network-or-cache_demo.html">Demo</a></p>
+    <small>Source: <a href="https://serviceworke.rs/strategy-network-or-cache.html">The Service Worker Cookbook</a> by Mozilla</small>
+
+    <aside class="notes">The service worker in this recipe tries to retrieve the most up to date content from the network but if the network is taking too long, it will serve cached content instead.
+    </aside>
   </section>
 </section>
 
