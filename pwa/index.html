@@ -408,6 +408,13 @@ or localhost for development
     <aside class="notes">The service worker in this recipe tries to retrieve the most up to date content from the network but if the network is taking too long, it will serve cached content instead.
     </aside>
   </section>
+  <section>
+    <h3>Use case: gated content</h3>
+    <p><img src="images/picalilli.svg"></p>
+    <p><a href="https://piccalil.li/">https://piccalil.li</a></p>
+    <small>Source: <a href="https://css-tricks.com/learning-to-simplify">css-tricks.com/learning-to-simplify/</a></small>
+    <aside class="notes">When you buy a course, my little API scurries along to that site and finds all the content for it. It then pushes that down to you. Then, the platform takes over because I use the baked-in Cache and Response APIs. I create a Response for each lesson in the course, then stick it in the Cache. This means that whenever you go to a lesson, you get that version that was previously hidden from you. The added bonus to this is that the content is offline-first, too.</aside>
+  </section>
 </section>
 
 <section data-markdown>
