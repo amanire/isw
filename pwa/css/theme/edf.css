@@ -321,9 +321,11 @@ body {
 
 /* Customizations for ISW deck */
 .title-slide.slide-background {
-  background-color: #ffcc00; }
+  background-color: #253d86; }
+.title-slide h1,
+.title-slide h2,
 .title-slide a {
-  color: #000; }
+  color: #fff; }
 .title-slide a:hover {
   color: #fff; }
 
