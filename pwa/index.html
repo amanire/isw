@@ -50,7 +50,7 @@ Notes:
 
 <section data-markdown>
   <textarea type="text/template">
-## Web sites
+## Web site
 
 - Reach 
   - Domain name
@@ -77,9 +77,11 @@ Notes:
 - Software as a Service (SaaS)
 - Examples
   - Gmail
+  - GitHub
 
 Notes:
-  - 
+  - Things like notifications
+  - App-like affordances on edf.org
   </textarea>
 </section>
 
@@ -160,6 +162,7 @@ Notes:
 - outlook.office.com
 - sqoosh.ap
 - Google Stadia
+- Excalidraw
 
 Notes:
   - Stadia just announced iOS beta (Apple's restrictions on cloud gaming apps)
@@ -251,20 +254,61 @@ or
     <img style="margin-top: 1em;" src="images/network-request-sw.svg" />
     <aside class="notes"></aside>
   </section>
+  <section>
+<p>Caching Strategy: Stale while revalidate</p>
+<img src="images/stale-while-revalidate.png"/>
+<small>Source: <a href="https://web.dev/offline-cookbook">The Offline Cookbook</a> by Jake Archibald</small>
+
+<aside class="notes">Ideal for: frequently updating resources where having the very latest version is non-essential. Avatars can fall into this category.
+
+If there's a cached version available, use it, but fetch an update for next time.
+</aside>
+    </textarea>
+  </section>
+  <section>
+<p>Cache First (Cache Falling Back to Network)</p>
+<img src="images/cache-first.png"/>
+<small>Source: <a href="https://web.dev/offline-cookbook">The Offline Cookbook</a> by Jake Archibald</small>
+
+<aside class="notes">Ideal for: building offline-first. In such cases, this is how you'll handle the majority of requests. Other patterns will be exceptions based on the incoming request.
+</aside>
+  </section>
+  <section>
+<h3>Network or cache</h3>
+<p><a href="https://serviceworke.rs/strategy-network-or-cache_demo.html">Demo</a></p>
+<small>Source: <a href="https://serviceworke.rs/strategy-network-or-cache.html">The Service Worker Cookbook</a> by Mozilla</small>
+
+<aside class="notes">The service worker in this recipe tries to retrieve the most up to date content from the network but if the network is taking too long, it will serve cached content instead.
+</aside>
+  </section>
 </section>
 
 <section>
   <h2>HTTPS</h2>
-  <div class="two-column">
-    <div>
-      <img style="background-color: #fff; padding: 20px; max-height: none;" src="images/letsencrypt-logo-horizontal.svg"/><br/>
-      <div><small><a href="https://letsencrypt.org/">letsencrypt.org</a></small></div>
+  <section data-markdown>
+    <textarea type="text/template">
+### Certificate Authority
+
+![](images/entrust-ca-logo.svg)
+    </textarea>
+  </section>
+  <section>
+    <div class="two-column">
+      <div>
+        <img style="background-color: #fff; padding: 20px; max-height: none;" src="images/letsencrypt-logo-horizontal.svg"/><br/>
+        <div><small><a href="https://letsencrypt.org/">letsencrypt.org</a></small></div>
+      </div>
+      <div>
+        <img style="background-color: #fff; padding: 20px; width:300px; max-height: none;" src="images/certbot-logo-1A.svg">
+        <div><small><a href="https://certbot.eff.org/">certbot.eff.org</a></small></div>
+      </div>
     </div>
-    <div>
-      <img style="background-color: #fff; padding: 20px; width:300px; max-height: none;" src="images/certbot-logo-1A.svg">
-      <div><small><a href="https://certbot.eff.org/">certbot.eff.org</a></small></div>
-    </div>
-  </div>
+  </section>
+  <section data-markdown>
+    <textarea type="text/template">
+or localhost for development
+    </textarea>
+  </section>
 </section>
 
 <section data-markdown>
@@ -361,16 +405,33 @@ Notes:
   <textarea type="text/template">
 ## Elephant in the room: Apple
 
+![](images/safari-is-the-new-ie.png)
+
+[safari-is-the-new-ie.com](https://www.safari-is-the-new-ie.com/)
+
+The author of the viral blog post has since recanted.
+
+[nolanlawson.com/2019/01/01/things-ive-been-wrong-about-things-ive-been-right-about/#wrong-safari-is-the-new-ie](https://nolanlawson.com/2019/01/01/things-ive-been-wrong-about-things-ive-been-right-about/#wrong-safari-is-the-new-ie)
+
+> As it turns out, Safari is not really the new IE. 
+
 - App Clips https://developer.apple.com/app-clips/
-- Arbitrary cache clearing
 - Safari's lack of support for Web APIs
   - push notifications
   - Background sync
   - …
+- Safari 7 day cap on storage, including service worker registrations
+(unless installed via _Add to Home Screen_)
 
   Steve Jobs when launching the iPhone:
 
 > Our innovative approach, using Web 2.0-based standards, lets developers create amazing new applications while keeping the iPhone secure and reliable.
+
+## Apple's priorities
+
+- Privacy
+- Battery life
+- Security
 
 Notes:
   - App Clips introduced at Apple's developer conference in June 2020
@@ -389,6 +450,24 @@ Notes:
   - XXX
   </textarea>
 </section>
+
+<section data-markdown>
+  <textarea type="text/template">
+### Chromium Web Capabilities (Project Fugu)
+https://web.dev/fugu-status/
+
+### Platform Adjacency Theory
+https://infrequently.org/2020/06/platform-adjacency-theory/
+
+### Should The Web Expose Hardware Capabilities? 
+https://www.smashingmagazine.com/2021/01/web-expose-hardware-capabilities/
+
+Notes:
+  - XXX
+  </textarea>
+</section>
+
+
 
 <section data-markdown>
   <textarea type="text/template">
@@ -411,7 +490,7 @@ Notes:
   <h2>Thank you</h2>
   <p><a href="https://amanire.com/pwa">amanire.com/pwa</a></p>
   <p>Aaron Manire</p>
-  <p><small><a href="https://twitter.com/amanire">@amanire</a></small><br/>
+  <p><small><a href="mailto:amanire@edf.org">amanire@edf.org</a></small><br/>
 </section>
 
 			</div> <!-- .slides -->
