@@ -256,6 +256,45 @@ or
   </section>
 </section>
 
+
+<section>
+  <h2>Register Service Worker</h2>
+  <code>/index.html</code>
+
+  <section>
+    <p>via inline script tag</p>
+  </section>
+
+  <section>
+<pre><code class="javascript" data-trim data-noescape>
+&lt;script&gt;
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('/serviceworker.js');
+}
+&lt;/script&gt;
+</code></pre>
+  <p class='fragment'>No modern JavaScript here!</p>
+  </section>
+
+  <section>
+    <h3>Progressive enhancement</h3>
+    <p>Service worker file is ignored if unsupported by browser.</p>
+  </section>
+
+  <section>
+    <h3>Scope</h3>
+<pre class="fragment"><code class="javascript" data-trim data-noescape>
+&lt;script&gt;
+if (navigator.serviceWorker) {
+navigator.serviceWorker.register('/serviceworker.js',
+<mark>{scope: '/app/'}</mark>
+);
+}
+&lt;/script&gt;
+</code></pre>
+  </section>
+</section>
+
 <section>
   <h2>Service Worker</h2>
   <section>
