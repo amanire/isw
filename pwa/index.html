@@ -35,10 +35,10 @@
 <section data-markdown>
   <textarea type="text/template">
 ## About me
-- Full-stack developer  <!-- .element: class="fragment" -->
-- Building websites with the Drupal CMS since 2007  <!-- .element: class="fragment" -->
-- First responsive site launched in 2013  <!-- .element: class="fragment" -->
-- Apple Enthusiast  <!-- .element: class="fragment" -->
+- Full-stack developer <!-- .element: class="fragment" -->
+- Building websites with the Drupal CMS since 2007 <!-- .element: class="fragment" -->
+- First responsive site launched in 2013 <!-- .element: class="fragment" -->
+- Apple Enthusiast <!-- .element: class="fragment" -->
 
 Notes:
 - Prefer UX web developer
@@ -50,59 +50,84 @@ Notes:
 
 <section data-markdown>
   <textarea type="text/template">
-## Web site
+## About this presentation
 
-- Reach 
-  - Domain name
-  - Search engine
-  - Linkable via URLs
-- Responsive
-- Progressive enhancement
+Intro to Service Workers
+amanire.com/isw
+
+Less technical overview of more general interest.
+Honestly haven't thought much about service workers for well over year but
+wanted to revisit.
 
 Notes:
+- 
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+## Web sites
+- Reach <!-- .element: class="fragment" -->
+  - Domain name <!-- .element: class="fragment" -->
+  - Linkable, shareable via URLs <!-- .element: class="fragment" -->
+  - Indexed by search engines <!-- .element: class="fragment" -->
+- Responsive <!-- .element: class="fragment" -->
+  - Device viewport size <!-- .element: class="fragment" -->
+- Accessible via Progressive enhancement <!-- .element: class="fragment" -->
+  - Site hierarchy and navigation <!-- .element: class="fragment" -->
+  - Device capabilities <!-- .element: class="fragment" -->
+  - User preferences <!-- .element: class="fragment" -->
+
+Notes:
+- "Worldwide web"
 - edf.org
 - search engine integregated into browser
   </textarea>
 </section>
 
 <section data-markdown>
-  <textarea type="text/template">
-## Web app
+  <textarea data-template>
+## Web apps
+- Reach <!-- .element: class="fragment" -->
+  - but URLs are often deprioritized <!-- .element: class="fragment" -->
+- Interactivity <!-- .element: class="fragment" -->
+- Personalized <!-- .element: class="fragment" -->
+- XHR/AJAX <!-- .element: class="fragment" -->
+- Software as a Service (SaaS) <!-- .element: class="fragment" -->
 
-- Reach 
-- Interactivity
-- Personalized
-- URLs are deprioritized
-- XHR/AJAX
-- Software as a Service (SaaS)
+Notes:
 - Examples
   - Gmail
   - GitHub
-
-Notes:
-  - Things like notifications
+- Things like notifications
   - App-like affordances on edf.org
   </textarea>
 </section>
 
-<section data-markdown>
-  <textarea type="text/template">
-## Native app
-
+<section>
+  <h2>Native apps</h2>
+  <section data-markdown>
+    <textarea data-template>
+### Operating Systems
 - Desktop
   - Windows
   - MacOS
   - ChromeOS
+  - Linux
 - Mobile
   - Android
   - iOS
-- No URLs
-- Strong OS integration
-- Performance
-
-Notes:
-  - XXX
-  </textarea>
+    </textarea>
+  </section>
+  <section data-markdown>
+    <textarea data-template>
+      - Strong OS integration
+      - No URLs <!-- .element: class="fragment" -->
+      - Performance <!-- .element: class="fragment" -->
+      - Security <!-- .element: class="fragment" -->
+      - Expensive to maintain across platforms <!-- .element: class="fragment" -->
+    </textarea>
+  </section>
 </section>
 
 <section>
@@ -122,7 +147,7 @@ Notes:
     <textarea type="text/template">
 ### Desktop
 
-- Electron www.electronjs.org
+- Electron
 - Proton Native
 
 Notes:
@@ -136,52 +161,43 @@ Notes:
   </section>
 </section>
 
-<section data-markdown>
-  <textarea type="text/template">
-## Progressive Web Apps
-- Web app OR web site
-- Progressive Enhancement 
-- Installable
-- Offline
-- Secure
-- Responsive (Touch-friendly)
-- Emerging APIs
-- App instance in switcher and OS search
-Notes:
-  - XXX
-  </textarea>
-</section>
-
-<section data-markdown>
-  <textarea type="text/template">
-
-# Example PWAs
-
-- Twitter
-- Unsplash
-- outlook.office.com
-- sqoosh.ap
-- Google Stadia
-- Excalidraw
-
-Notes:
-  - Stadia just announced iOS beta (Apple's restrictions on cloud gaming apps)
-  https://support.google.com/stadia/answer/10204874?hl=en
-  </textarea>
-</section>
-
-<section data-markdown>
-  <textarea type="text/template">
-## PWA under the hood
-
-- Manifest
-- Service worker
-- HTTPS
-- Web APIs
-
-Notes:
-  - XXX
-  </textarea>
+<section>
+  <h2>Progressive Web Apps</h2>
+  <section>
+    <div class="two-column" style="margin-bottom: 1em;">
+      <div>
+        <ul>
+          <li>Linkable</li>
+          <li>Responsive</li>
+          <li>App-like-interactions</li>
+          <li>Connectivity independent</li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <li>Safe</li>
+          <li>Discoverable</li>
+          <li>Re-engageable</li>
+          <li>Fresh</li>
+          <li>Installable</li>
+        </ul>
+      </div>
+    </div>
+    <p><small>Alew Russell & Frances Berriman<br/>
+      <a href="https://infrequently.org/2015/06/progressive-apps-escaping-tabs-without-losing-our-soul/">infrequently.org/2015/06/progressive-apps-escaping-tabs-without-losing-our-soul</a></small></p>
+    </section>
+  <section>
+    <h3>Any site can be a PWA</h3>
+    <ul>
+      <li>HTTPS</li>
+      <li>Service Worker</li>
+      <li>Manifest JSON file</li>
+    </ul>
+    <p><small>Jeremey Keith<br/>
+      <a href="https://adactio.com/journal/13884">adactio.com/journal/13884</a></small>
+    </p>
+    <aside class="notes"></aside>
+  </section>
 </section>
 
 <section>
@@ -315,16 +331,33 @@ or localhost for development
   <textarea type="text/template">
 ## Web APIs
 
-- https://developer.mozilla.org/en-US/docs/Web/API
+- Web Share
 - Clipboard
-- File System Access
+- Push
 - Payment
-- Share sheet
-- Browser placement 
-- Browser compatibility
+- File System Access
+- Full Screen
 
 Notes:
   - XXX
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea type="text/template">
+
+# Example PWAs
+
+- Twitter
+- Unsplash
+- outlook.office.com
+- sqoosh.ap
+- Google Stadia
+- Excalidraw
+
+Notes:
+  - Stadia just announced iOS beta (Apple's restrictions on cloud gaming apps)
+  https://support.google.com/stadia/answer/10204874?hl=en
   </textarea>
 </section>
 
@@ -333,6 +366,8 @@ Notes:
   <section data-markdown>
     <textarea type="text/template">
 ### Chrome developer tools
+
+![](images/chrome-logo.svg)
 
 [chromium.org/blink/serviceworker/service-worker-faq](https://chromium.org/blink/serviceworker/service-worker-faq)
     </textarea>
@@ -432,6 +467,7 @@ The author of the viral blog post has since recanted.
 - Privacy
 - Battery life
 - Security
+- Accessibility
 
 Notes:
   - App Clips introduced at Apple's developer conference in June 2020
@@ -480,7 +516,8 @@ Notes:
   - Epic Games (Fortnight) trial in May
 - Google Stadia
 - MS Outlook
-
+https://www.windowscentral.com/project-monarch-outlook-web-universal-email-client-microsoft
+codenamed Monarch
 Notes:
   - XXX
   </textarea>
